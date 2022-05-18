@@ -33,7 +33,7 @@ void printPerson(const Person *person, const char *comment)
     }
     else
     {
-        printf("%s:\n age:%d\n address: %p\n next: %p\n", comment, person->age, person, person->next);
+        printf("%s: age:%d\n", comment, person->age, person, person->next);
     }
 }
 
@@ -66,7 +66,7 @@ void cleanUp(Person* list)
     while(list)
     {
         nextElem = list->next;
-        printf("Cleaning...\n");
+        printf("Cleaning age: %d\n", list->age);
         free(list);
         list = nextElem;
     }
@@ -92,6 +92,11 @@ int main()
         if(strcmp("quit\n", command) == 0)  // if type quit exit program
         {
             printf("Exiting program...\n");
+
+            cleanUp(head);
+            head = NULL;
+            added = NULL;
+
             return 0;
         }
         else if(strcmp("print\n", command) == 0)
@@ -123,11 +128,6 @@ int main()
             printf("Person age added!\n");
         }
     }
-
-    cleanUp(head);
-
-    head = NULL;
-    added = NULL;
 
     printf("** END LINK LIST **\n");
 
